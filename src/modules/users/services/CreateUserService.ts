@@ -1,10 +1,10 @@
-import { hash } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
 import User from '../infra/typeorm/entities/User';
 import IUserRepository from '../repositories/IUsersRepository';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import CheckYupErrors from '../infra/yup/errors/CheckYupErrors';
 
 interface IRequest {
@@ -28,6 +28,9 @@ class CreateUserService {
     constructor(
         @inject('UsersRepository')
         private usersRepository: IUserRepository,
+
+        @inject('HashProvider')
+        private hashProvider: IHashProvider,
     ) {}
 
     async execute(data: IRequest): Promise<User> {
@@ -50,7 +53,7 @@ class CreateUserService {
         }
 
         // Create hash to use on password hash
-        const hashedPassword = await hash(password, 8);
+        const hashedPassword = await this.hashProvider.generateHash(password);
 
         const user = this.usersRepository.create({
             email,
