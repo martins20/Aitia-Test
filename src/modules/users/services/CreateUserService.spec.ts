@@ -28,7 +28,7 @@ describe('CreateUser', () => {
         expect(user).toHaveProperty('id');
     });
 
-    it('should be not able to create a new user with wrong confirm password', async () => {
+    it('should be able to not create a new user with wrong confirm password', async () => {
         const fakeUsersRepository = new FakeUsersRepository();
 
         const createUser = new CreateUserService(fakeUsersRepository);
