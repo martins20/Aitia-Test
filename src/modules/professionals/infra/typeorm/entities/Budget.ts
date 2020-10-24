@@ -36,9 +36,6 @@ class Budget {
     @Column()
     owner_id: string;
 
-    @Column('integer')
-    budget_price: number;
-
     @ManyToOne(() => User, user => user.id, {
         eager: true,
     })

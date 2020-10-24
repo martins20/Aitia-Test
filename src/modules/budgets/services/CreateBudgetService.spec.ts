@@ -49,7 +49,7 @@ describe('CreateBudgetServer', () => {
         expect(budget).toHaveProperty('budget_id');
     });
 
-    it('should be not able to create a new budget withou any params', async () => {
+    it('should be not able to create a new budget without any params', async () => {
         const fakeBudgetsRepository = new FakeBudgetsRepository();
 
         const createBudget = new CreateBudgetService(fakeBudgetsRepository);
@@ -59,7 +59,7 @@ describe('CreateBudgetServer', () => {
         );
     });
 
-    it('should be not able to create a new budget withou an existent user', async () => {
+    it('should be not able to create a new budget without an existent user', async () => {
         const fakeBudgetsRepository = new FakeBudgetsRepository();
 
         const createBudget = new CreateBudgetService(fakeBudgetsRepository);

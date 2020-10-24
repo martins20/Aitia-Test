@@ -12,6 +12,7 @@ interface IRequest {
     po_quantity: number;
     min_days: number;
     owner_id: string;
+    budget_price: number;
 }
 
 @injectable()

@@ -1,5 +1,4 @@
 import AppError from '@shared/errors/AppError';
-import Budget from '../infra/typeorm/entities/Budget';
 
 import FakeBudgetsRepository from '../repositories/fakes/FakeBudgetsRepository';
 import CreateBudgetService from './CreateBudgetService';

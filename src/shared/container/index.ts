@@ -8,6 +8,9 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IBudgetsRepository from '@modules/budgets/repositories/IBudgetsRepository';
 import BudgetsRepository from '@modules/budgets/infra/typeorm/repositories/BudgetsRepository';
 
+import IProfessionalsRepository from '@modules/professionals/repositories/IProfessionalsRepository';
+import ProfessionalRepository from '@modules/professionals/infra/typeorm/repositories/ProfessionalsRepository';
+
 container.registerSingleton<IUsersRepository>(
     'UsersRepository',
     UsersRepository,
@@ -16,4 +19,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IBudgetsRepository>(
     'BudgetsRepository',
     BudgetsRepository,
+);
+
+container.registerSingleton<IProfessionalsRepository>(
+    'ProfessionalsRepository',
+    ProfessionalRepository,
 );

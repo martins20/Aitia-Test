@@ -6,6 +6,7 @@ import FindUserService from '@modules/users/services/FindUserService';
 import CreateBudgetService from '@modules/budgets/services/CreateBudgetService';
 import ListBudgetsService from '@modules/budgets/services/ListBudgetsService';
 import DeleteBudgetService from '@modules/budgets/services/DeleteBudgetService';
+import CalculateBudgetPriceService from '@modules/professionals/services/CalculateBudgetPriceService';
 
 export default class UsersController {
     async list(request: Request, response: Response) {
@@ -24,12 +25,30 @@ export default class UsersController {
 
         const createBudget = container.resolve(CreateBudgetService);
         const findUser = container.resolve(FindUserService);
+        const getBudgetPrice = container.resolve(CalculateBudgetPriceService);
 
         const user = await findUser.execute(id);
+
+        const {
+            designer_quantity,
+            sm_quantity,
+            po_quantity,
+            min_days,
+            dev_quantity,
+        } = data;
+
+        const totalBudgetPrice = await getBudgetPrice.execute({
+            designer_quantity,
+            sm_quantity,
+            po_quantity,
+            min_days,
+            dev_quantity,
+        });
 
         const budget = await createBudget.execute({
             ...data,
             owner_id: user.id,
+            budget_price: totalBudgetPrice,
         });
 
         return response.json(budget);
@@ -37,11 +56,10 @@ export default class UsersController {
 
     async delete(request: Request, response: Response) {
         const { budget_id } = request.params;
-        const { id } = request.user;
 
         const deleteBudget = container.resolve(DeleteBudgetService);
 
-        await deleteBudget.execute(budget_id, id);
+        await deleteBudget.execute(budget_id);
 
         return response.status(204).json();
     }
