@@ -8,7 +8,7 @@ export class CreateBudgets1603525599015 implements MigrationInterface {
                 name: 'budgets',
                 columns: [
                     {
-                        name: 'id',
+                        name: 'budget_id',
                         type: 'uuid',
                         isPrimary: true,
                         isUnique: true,

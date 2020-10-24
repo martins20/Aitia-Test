@@ -1,7 +1,5 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
-
 import Budget from '../infra/typeorm/entities/Budget';
 import IBudgetRepository from '../repositories/IBudgetsRepository';
 import CheckYupErrors from '../infra/yup/errors/CheckYupErrors';
@@ -13,6 +11,7 @@ interface IRequest {
     sm_quantity: number;
     po_quantity: number;
     min_days: number;
+    owner_id: string;
 }
 
 @injectable()

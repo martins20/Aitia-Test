@@ -1,5 +1,6 @@
-import Budget from '../infra/typeorm/entities/Budget';
 import ICreateBudgetDTO from '../dtos/ICreateBudgetDTO';
+
+import Budget from '../infra/typeorm/entities/Budget';
 
 export default interface IBudgetRepository {
     findById(id: string): Promise<Budget | undefined>;

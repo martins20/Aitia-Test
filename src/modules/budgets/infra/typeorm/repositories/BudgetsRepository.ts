@@ -4,6 +4,7 @@ import IBudgetRepository from '@modules/budgets/repositories/IBudgetsRepository'
 import ICreateBudgetDTO from '@modules/budgets/dtos/ICreateBudgetDTO';
 
 import Budget from '../entities/Budget';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 class BudgetsRepository implements IBudgetRepository {
     private ormRepository: Repository<Budget>;
@@ -19,7 +20,7 @@ class BudgetsRepository implements IBudgetRepository {
     }
 
     async findById(id: string): Promise<Budget | undefined> {
-        const user = await this.ormRepository.findOne(id);
+        const user = await this.ormRepository.findOne({ budget_id: id });
 
         return user;
     }

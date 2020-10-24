@@ -5,4 +5,5 @@ export default interface ICreateBudgetDTO {
     sm_quantity: number;
     po_quantity: number;
     min_days: number;
+    owner_id: string;
 }

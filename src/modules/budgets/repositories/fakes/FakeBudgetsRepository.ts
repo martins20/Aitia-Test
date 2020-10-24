@@ -13,7 +13,7 @@ class BudgetsRepository implements IBudgetRepository {
     }
 
     async findById(id: string): Promise<Budget | undefined> {
-        const findId = this.budgets.find(budget => budget.id === id);
+        const findId = this.budgets.find(budget => budget.budget_id === id);
 
         return findId;
     }
@@ -29,7 +29,7 @@ class BudgetsRepository implements IBudgetRepository {
         const budget = new Budget();
 
         Object.assign(budget, {
-            id: v4(),
+            budget_id: v4(),
             name,
             dev_quantity,
             designer_quantity,
@@ -51,7 +51,7 @@ class BudgetsRepository implements IBudgetRepository {
 
     async save(budget: Budget): Promise<Budget> {
         const findIndex = this.budgets.findIndex(
-            findBudget => findBudget.id === budget.id,
+            findBudget => findBudget.budget_id === budget.budget_id,
         );
 
         this.budgets[findIndex] = budget;
