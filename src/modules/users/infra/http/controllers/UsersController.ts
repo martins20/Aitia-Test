@@ -19,10 +19,11 @@ export default class UsersController {
 
     async delete(request: Request, response: Response) {
         const { user_id } = request.params;
+        const { id } = request.user;
 
         const deleteUser = container.resolve(DeleteUserService);
 
-        await deleteUser.execute(user_id);
+        await deleteUser.execute(user_id, id);
 
         return response.status(204).json();
     }
