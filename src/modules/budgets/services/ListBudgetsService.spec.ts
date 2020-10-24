@@ -19,6 +19,7 @@ describe('ListBudgetsService', () => {
             min_days: 60,
             po_quantity: 1,
             sm_quantity: 1,
+            owner_id: '05460aa3-1249-49c7-a82c-c05a28d419a2',
         });
 
         await createBudget.execute({
@@ -28,6 +29,7 @@ describe('ListBudgetsService', () => {
             min_days: 60,
             po_quantity: 0,
             sm_quantity: 1,
+            owner_id: '05460aa3-1249-49c7-a82c-c05a28d419a2',
         });
 
         await createBudget.execute({
@@ -37,9 +39,12 @@ describe('ListBudgetsService', () => {
             min_days: 60,
             po_quantity: 5,
             sm_quantity: 1,
+            owner_id: '05460aa3-1249-49c7-a82c-c05a28d419a2',
         });
 
-        const budgets = await listBudgets.execute();
+        const budgets = await listBudgets.execute(
+            '05460aa3-1249-49c7-a82c-c05a28d419a2',
+        );
 
         expect(budgets).toHaveLength(3);
     });

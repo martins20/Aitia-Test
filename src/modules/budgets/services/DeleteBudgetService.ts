@@ -1,7 +1,8 @@
 import { injectable, inject } from 'tsyringe';
 
-import Budget from '../infra/typeorm/entities/Budget';
 import IBudgetRepository from '../repositories/IBudgetsRepository';
+
+import AppError from '@shared/errors/AppError';
 
 @injectable()
 class ListBudgetsService {
@@ -10,8 +11,12 @@ class ListBudgetsService {
         private budgetsRepository: IBudgetRepository,
     ) {}
 
-    async execute(id: string): Promise<Budget[] | undefined> {
-        const budgets = await this.budgetsRepository.destroy(id);
+    async execute(budget_id: string): Promise<void> {
+        const findBudget = await this.budgetsRepository.findById(budget_id);
+
+        if (!findBudget) throw new AppError('Budget not exists', 404);
+
+        await this.budgetsRepository.destroy(findBudget);
     }
 }
 

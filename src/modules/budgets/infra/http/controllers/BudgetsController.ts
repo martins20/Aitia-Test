@@ -1,15 +1,19 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
+import FindUserService from '@modules/users/services/FindUserService';
+
 import CreateBudgetService from '@modules/budgets/services/CreateBudgetService';
 import ListBudgetsService from '@modules/budgets/services/ListBudgetsService';
-import FindUserService from '@modules/users/services/FindUserService';
+import DeleteBudgetService from '@modules/budgets/services/DeleteBudgetService';
 
 export default class UsersController {
     async list(request: Request, response: Response) {
+        const { id } = request.user;
+
         const getBudgets = container.resolve(ListBudgetsService);
 
-        const budgets = await getBudgets.execute();
+        const budgets = await getBudgets.execute(id);
 
         return response.json(budgets);
     }
@@ -31,5 +35,14 @@ export default class UsersController {
         return response.json(budget);
     }
 
-    async delete(request: Request, response: Response) {}
+    async delete(request: Request, response: Response) {
+        const { budget_id } = request.params;
+        const { id } = request.user;
+
+        const deleteBudget = container.resolve(DeleteBudgetService);
+
+        await deleteBudget.execute(budget_id, id);
+
+        return response.json();
+    }
 }

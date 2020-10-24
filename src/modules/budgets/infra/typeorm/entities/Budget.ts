@@ -4,7 +4,6 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
-    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -37,9 +36,11 @@ class Budget {
     @Column()
     owner_id: string;
 
-    @OneToOne(() => User)
+    @ManyToOne(() => User, user => user.id, {
+        eager: true,
+    })
     @JoinColumn({ name: 'owner_id' })
-    id: User;
+    User: User;
 
     @CreateDateColumn()
     created_at: string;

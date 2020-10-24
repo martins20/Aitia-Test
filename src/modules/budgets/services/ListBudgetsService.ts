@@ -10,8 +10,8 @@ class ListBudgetsService {
         private budgetsRepository: IBudgetRepository,
     ) {}
 
-    async execute(): Promise<Budget[] | undefined> {
-        const budgets = await this.budgetsRepository.list();
+    async execute(id: string): Promise<Budget[] | undefined> {
+        const budgets = await this.budgetsRepository.list(id);
 
         return budgets;
     }
