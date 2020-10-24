@@ -5,6 +5,7 @@ import AppError from '@shared/errors/AppError';
 
 import User from '../infra/typeorm/entities/User';
 import IUserRepository from '../repositories/IUsersRepository';
+import CheckYupErrors from '../infra/yup/errors/CheckYupErrors';
 
 interface IRequest {
     first_name: string;
@@ -29,17 +30,16 @@ class CreateUserService {
         private usersRepository: IUserRepository,
     ) {}
 
-    async execute({
-        email,
-        password,
-        confirm_password,
-        ...rest
-    }: IRequest): Promise<User> {
+    async execute(data: IRequest): Promise<User> {
+        const { email, password, confirm_password, ...rest } = data;
+
         const checkUserExist = await this.usersRepository.findByEmail(email);
 
         if (checkUserExist) {
             throw new AppError('Email address already used');
         }
+
+        await CheckYupErrors(data);
 
         // checks if confirm_password was correct
         if (confirm_password !== password) {
