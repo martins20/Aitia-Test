@@ -14,20 +14,20 @@ class Budget {
     @Column()
     name: string;
 
-    @Column('interger')
+    @Column('integer')
     dev_quantity: number;
 
-    @Column('interger')
+    @Column('integer')
     designer_quantity: number;
 
-    @Column('interger')
+    @Column('integer')
     sm_quantity: number;
 
-    @Column('interger')
+    @Column('integer')
     po_quantity: number;
 
-    @Column('interger')
-    min_day: number;
+    @Column('integer')
+    min_days: number;
 
     @CreateDateColumn()
     created_at: string;

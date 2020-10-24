@@ -22,26 +22,26 @@ export class CreateBudgets1603525599015 implements MigrationInterface {
                     },
                     {
                         name: 'dev_quantity',
-                        type: 'varchar',
+                        type: 'integer',
                         isNullable: false,
                     },
                     {
                         name: 'designer_quantity',
-                        type: 'varchar',
+                        type: 'integer',
                         isNullable: false,
                     },
                     {
                         name: 'sm_quantity',
-                        type: 'varchar',
+                        type: 'integer',
                         isNullable: false,
                     },
                     {
                         name: 'po_quantity',
-                        type: 'varchar',
+                        type: 'integer',
                         isNullable: false,
                     },
                     {
-                        name: 'min_day',
+                        name: 'min_days',
                         type: 'integer',
                         isNullable: false,
                         default: 10,

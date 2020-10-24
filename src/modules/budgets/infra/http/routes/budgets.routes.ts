@@ -9,6 +9,7 @@ const budgetsController = new BudgetsController();
 
 BudgetsRouter.use(ensureAuthenticated);
 
+BudgetsRouter.get('/', budgetsController.list);
 BudgetsRouter.post('/', budgetsController.create);
 
 export default BudgetsRouter;

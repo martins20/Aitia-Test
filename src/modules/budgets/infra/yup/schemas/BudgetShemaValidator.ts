@@ -8,7 +8,9 @@ const BudgetShemaValidator = Yup.object().shape<ICreateBudgetDTO>({
     designer_quantity: Yup.number().required('designer_quantity is required'),
     sm_quantity: Yup.number().required('sm_quantity is required'),
     po_quantity: Yup.number().required('po_quantity is required'),
-    min_day: Yup.number().required('min_day is required'),
+    min_days: Yup.number()
+        .required('min_days is required')
+        .min(10, 'min_days quantity must be more than 10'),
 });
 
 export default BudgetShemaValidator;

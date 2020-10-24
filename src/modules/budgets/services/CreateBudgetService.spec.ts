@@ -14,7 +14,7 @@ describe('CreateBudgetServer', () => {
             name: 'Tinbeer',
             designer_quantity: 2,
             dev_quantity: 2,
-            min_day: 60,
+            min_days: 60,
             po_quantity: 1,
             sm_quantity: 1,
         });

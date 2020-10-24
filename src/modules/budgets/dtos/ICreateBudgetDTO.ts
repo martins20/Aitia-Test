@@ -4,5 +4,5 @@ export default interface ICreateBudgetDTO {
     designer_quantity: number;
     sm_quantity: number;
     po_quantity: number;
-    min_day: number;
+    min_days: number;
 }
