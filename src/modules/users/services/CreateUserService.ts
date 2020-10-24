@@ -39,12 +39,13 @@ class CreateUserService {
             throw new AppError('Email address already used');
         }
 
+        // Validate request
         await CheckYupErrors(data);
 
         // checks if confirm_password was correct
         if (confirm_password !== password) {
             throw new AppError(
-                '"password" and "confirm_password" must be the same',
+                'password and confirm_password must be the same',
             );
         }
 
