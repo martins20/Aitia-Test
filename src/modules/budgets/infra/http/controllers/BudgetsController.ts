@@ -43,6 +43,6 @@ export default class UsersController {
 
         await deleteBudget.execute(budget_id, id);
 
-        return response.json();
+        return response.status(204).json();
     }
 }
