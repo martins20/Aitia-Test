@@ -11,7 +11,7 @@ class ListBudgetsService {
     ) {}
 
     async execute(): Promise<Budget[] | undefined> {
-        const budgets = this.budgetsRepository.list();
+        const budgets = await this.budgetsRepository.list();
 
         return budgets;
     }

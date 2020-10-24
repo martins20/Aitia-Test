@@ -26,7 +26,7 @@ class CreateBudgetService {
         // Validate request
         await CheckYupErrors(data);
 
-        const budget = this.budgetsRepository.create(data);
+        const budget = await this.budgetsRepository.create(data);
 
         return budget;
     }
