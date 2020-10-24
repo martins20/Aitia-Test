@@ -1,4 +1,5 @@
 import { hash } from 'bcryptjs';
+import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
@@ -21,8 +22,12 @@ interface IRequest {
     city: string;
 }
 
+@injectable()
 class CreateUserService {
-    constructor(private usersRepository: IUserRepository) {}
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository: IUserRepository,
+    ) {}
 
     async execute({
         email,
