@@ -9,7 +9,7 @@ import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHa
 import CreateUserService from '@modules/users/services/CreateUserService';
 
 describe('DeleteBudgetService', () => {
-    it('should be able to delete a existent budget', async () => {
+    it('should be able to delete an existent budget', async () => {
         const fakeBudgetsRepository = new FakeBudgetsRepository();
         const fakeUsersRepository = new FakeUsersRepository();
         const fakeHashProvider = new FakeHashProvider();
@@ -40,11 +40,12 @@ describe('DeleteBudgetService', () => {
         const { budget_id } = await createBudget.execute({
             name: 'Tinbeer',
             designer_quantity: 2,
-            dev_quantity: 2,
+            dev_quantity: 1,
             min_days: 60,
             po_quantity: 1,
             sm_quantity: 1,
             owner_id: id,
+            budget_price: 48000,
         });
 
         const deletedUser = await deleteBudget.execute(budget_id);
@@ -52,7 +53,7 @@ describe('DeleteBudgetService', () => {
         expect(deletedUser).toBeUndefined();
     });
 
-    it('should be not able to delete a inexistent budget', async () => {
+    it('should be not able to delete an inexistent budget', async () => {
         const fakeBudgetsRepository = new FakeBudgetsRepository();
 
         const deleteBudget = new DeleteBudgetService(fakeBudgetsRepository);

@@ -4,11 +4,25 @@ import { container } from 'tsyringe';
 import FindUserService from '@modules/users/services/FindUserService';
 
 import CreateBudgetService from '@modules/budgets/services/CreateBudgetService';
+import ShowBudgetService from '@modules/budgets/services/ShowBudgetService';
 import ListBudgetsService from '@modules/budgets/services/ListBudgetsService';
 import DeleteBudgetService from '@modules/budgets/services/DeleteBudgetService';
 import CalculateBudgetPriceService from '@modules/professionals/services/CalculateBudgetPriceService';
 
 export default class UsersController {
+    async show(request: Request, response: Response) {
+        const { budget_id } = request.params;
+        const { id } = request.user;
+
+        const getBudget = container.resolve(ShowBudgetService);
+
+        const budget = await getBudget.execute(budget_id, id);
+
+        delete budget?.User;
+
+        return response.json(budget);
+    }
+
     async list(request: Request, response: Response) {
         const { id } = request.user;
 

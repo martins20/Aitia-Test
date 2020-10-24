@@ -25,6 +25,8 @@ class BudgetsRepository implements IBudgetRepository {
         po_quantity,
         sm_quantity,
         min_days,
+        owner_id,
+        budget_price,
     }: ICreateBudgetDTO): Promise<Budget> {
         const budget = new Budget();
 
@@ -36,6 +38,8 @@ class BudgetsRepository implements IBudgetRepository {
             po_quantity,
             sm_quantity,
             min_days,
+            owner_id,
+            budget_price,
         });
 
         this.budgets.push(budget);

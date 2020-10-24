@@ -1,20 +1,21 @@
 import AppError from '@shared/errors/AppError';
-import Budget from '../infra/typeorm/entities/Budget';
 
 import FakeBudgetsRepository from '../repositories/fakes/FakeBudgetsRepository';
 import CreateBudgetService from './CreateBudgetService';
+import ShowBudgetService from './ShowBudgetService';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from '@modules/users/services/CreateUserService';
 
-describe('CreateBudgetServer', () => {
-    it('should be able to create a new budget', async () => {
+describe('ShowBudgetService', () => {
+    it('should be able to shows an existent budget', async () => {
         const fakeBudgetsRepository = new FakeBudgetsRepository();
         const fakeUsersRepository = new FakeUsersRepository();
         const fakeHashProvider = new FakeHashProvider();
 
         const createBudget = new CreateBudgetService(fakeBudgetsRepository);
+        const showBudget = new ShowBudgetService(fakeBudgetsRepository);
         const createUser = new CreateUserService(
             fakeUsersRepository,
             fakeHashProvider,
@@ -36,7 +37,7 @@ describe('CreateBudgetServer', () => {
             complement: 'Casa',
         });
 
-        const budget = await createBudget.execute({
+        const { budget_id } = await createBudget.execute({
             name: 'Tinbeer',
             designer_quantity: 1,
             dev_quantity: 1,
@@ -47,26 +48,40 @@ describe('CreateBudgetServer', () => {
             budget_price: 48000,
         });
 
-        expect(budget).toHaveProperty('budget_id');
+        const findedBudget = await showBudget.execute(budget_id, id);
+
+        expect(findedBudget).toHaveProperty('budget_id');
     });
 
-    it('should be not able to create a new budget without any params', async () => {
+    it('should be not able to shows an inexistent budget', async () => {
         const fakeBudgetsRepository = new FakeBudgetsRepository();
+        const fakeUsersRepository = new FakeUsersRepository();
+        const fakeHashProvider = new FakeHashProvider();
 
-        const createBudget = new CreateBudgetService(fakeBudgetsRepository);
-
-        expect(createBudget.execute({} as Budget)).rejects.toBeInstanceOf(
-            AppError,
+        const showBudget = new ShowBudgetService(fakeBudgetsRepository);
+        const createUser = new CreateUserService(
+            fakeUsersRepository,
+            fakeHashProvider,
         );
-    });
 
-    it('should be not able to create a new budget without an existent user', async () => {
-        const fakeBudgetsRepository = new FakeBudgetsRepository();
+        const { id } = await createUser.execute({
+            first_name: 'John',
+            second_name: 'Doe',
+            cpf: '54587965124',
+            email: 'teste@teste.com',
+            password: '123456',
+            confirm_password: '123456',
+            phone: '99999999999',
+            cep: '28950000',
+            address: 'Rua tal',
+            number: 18,
+            state: 'Rio de Janeiro',
+            city: 'Armação dos Búzios',
+            complement: 'Casa',
+        });
 
-        const createBudget = new CreateBudgetService(fakeBudgetsRepository);
-
-        expect(createBudget.execute({} as Budget)).rejects.toBeInstanceOf(
-            AppError,
-        );
+        expect(
+            showBudget.execute('87be9b23-700c-4b08-a22e-344cc61uwc5', id),
+        ).rejects.toBeInstanceOf(AppError);
     });
 });
