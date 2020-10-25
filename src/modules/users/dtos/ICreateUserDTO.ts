@@ -6,6 +6,8 @@ export default interface ICreateUserDTO {
     password_hash: string;
     phone: string;
     cep: string;
+    cnpj: string;
+    company_name: string;
     address: string;
     number: number;
     complement: string;

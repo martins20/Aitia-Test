@@ -43,6 +43,16 @@ export default class CreateUsers1603501468165 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
+                        name: 'cnpj',
+                        type: 'varchar',
+                        isNullable: false,
+                    },
+                    {
+                        name: 'company_name',
+                        type: 'varchar',
+                        isNullable: false,
+                    },
+                    {
                         name: 'cep',
                         type: 'varchar',
                         isNullable: false,

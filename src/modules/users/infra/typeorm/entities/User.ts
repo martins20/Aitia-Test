@@ -27,6 +27,12 @@ class User {
     phone: string;
 
     @Column()
+    cnpj: string;
+
+    @Column()
+    company_name: string;
+
+    @Column()
     cep: string;
 
     @Column()

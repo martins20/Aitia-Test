@@ -7,6 +7,8 @@ export default interface IUserShemaValidator {
     confirm_password: string;
     phone: string;
     cep: string;
+    cnpj: string;
+    company_name: string;
     address: string;
     number: number;
     complement: string;

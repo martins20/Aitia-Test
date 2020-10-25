@@ -29,6 +29,8 @@ describe('CreateBudgetServer', () => {
             confirm_password: '123456',
             phone: '99999999999',
             cep: '28950000',
+            cnpj: '99999999999999',
+            company_name: 'Tinbeer inc',
             address: 'Rua tal',
             number: 18,
             state: 'Rio de Janeiro',
