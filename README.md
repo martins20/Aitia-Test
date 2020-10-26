@@ -23,11 +23,9 @@ $ yarn dev:server
 ```
 
 <br>
-<br>
 
 <img src="./assets/scripts.gif" alt="steps"/>
 
-<br>
 <br>
 
 # Endpoints
