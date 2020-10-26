@@ -1,5 +1,5 @@
 import IProfessionalRepository from '@modules/professionals/repositories/IProfessionalsRepository';
-import ICreateTotalPriceDTO from '@modules/budgets/dtos/ICreateTotalPriceDTO';
+import ICreateTotalPriceDTO from '@modules/budgets/dtos/ICreateBudgetDTO';
 
 import Professional from '@modules/professionals/infra/typeorm/entities/Professional';
 
