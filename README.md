@@ -13,8 +13,6 @@ $ cd MyBudgets-Backend
 
 $ cp .env.example .env
 
-  open .env and change JWT_SECRET to some MD5 hash
-
 $ yarn docker
 
 $ yarn test
