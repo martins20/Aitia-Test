@@ -13,6 +13,8 @@ $ cd MyBudgets-Backend
 
 $ cp .env.example .env
 
+$ yarn
+
 $ yarn docker
 
 $ yarn test
