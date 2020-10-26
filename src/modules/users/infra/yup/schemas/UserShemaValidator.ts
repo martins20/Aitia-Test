@@ -10,6 +10,8 @@ const UserShemaValidator = Yup.object().shape<IUserShemaValidatorDTO>({
     password: Yup.string().required('password is required'),
     confirm_password: Yup.string().required('confirm_password is required'),
     phone: Yup.string().required('phone is required'),
+    cnpj: Yup.string().required('cnpj is required'),
+    company_name: Yup.string().required('company_name is required'),
     cep: Yup.string().required('cep is required'),
     address: Yup.string().required('address is required'),
     number: Yup.number().required('number is required'),
